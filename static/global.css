@@ -1,0 +1,28 @@
+@font-face {
+	font-family: "LeeSeoyun";
+	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff")
+		format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+:root {
+	font-family: "LeeSeoyun";
+	background: #f5f5f5;
+	scrollbar-width: none;
+	overflow: hidden;
+}
+
+:root * {
+	font-family: inherit;
+	box-sizing: border-box;
+	touch-action: none;
+}
+
+:root,
+body {
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
+}
