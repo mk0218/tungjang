@@ -1,15 +1,16 @@
 <script lang="ts">
-	import { initialBalance, outgoing } from "$lib/stores";
-	type DisplayInfo = "outgoing" | "balance";
-
-	let displayInfo: DisplayInfo = "outgoing";
+	import { initialBalance, outgoing, summaryType } from "$lib/stores";
 
 	function switchInfo() {
-		if (displayInfo === "outgoing") {
-			displayInfo = "balance";
+		if ($summaryType === "outgoing") {
+			$summaryType = "balance";
 		} else {
-			displayInfo = "outgoing";
+			$summaryType = "outgoing";
 		}
+	}
+
+	function formatAmount(amount: number) {
+		return new Intl.NumberFormat().format(amount);
 	}
 
 	const currency = "원";
@@ -19,12 +20,12 @@
 	let summaryTitle: string;
 	let summaryValue: string;
 
-	$: if (displayInfo === "outgoing") {
+	$: if ($summaryType === "outgoing") {
 		summaryTitle = "지출";
-		summaryValue = `${$outgoing}${currency}`;
+		summaryValue = `${formatAmount($outgoing)}${currency}`;
 	} else {
 		summaryTitle = "잔액";
-		summaryValue = `${currentBalance}${currency}`;
+		summaryValue = `${formatAmount(currentBalance)}${currency}`;
 	}
 </script>
 

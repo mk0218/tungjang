@@ -3,7 +3,7 @@ import type { Wallet } from "./wallet";
 
 // ! Temporary data - Remove this later.
 const walletData: Wallet = {
-	initial: 180000,
+	initial: 180000000,
 	outgoing: 20000,
 	incoming: 20000,
 	history: [
@@ -36,6 +36,10 @@ export const initialBalance = derived(wallet, ($wallet) => $wallet.initial);
 export const outgoing = derived(wallet, ($wallet) => $wallet.outgoing);
 export const incoming = derived(wallet, ($wallet) => $wallet.incoming);
 export const history = derived(wallet, ($wallet) => $wallet.history);
+
+type SummaryTypef = "outgoing" | "balance";
+
+export const summaryType = writable<SummaryTypef>("outgoing");
 
 /**
  * Whenever DB and API is implemented:

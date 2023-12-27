@@ -11,7 +11,7 @@
 	}
 </script>
 
-<Titlebar title="전부" />
+<Titlebar title="이번 달 소비" />
 <div class="content">
 	<div class="collapsible {showSummary ? 'expand' : 'collapse'}">
 		{#if showSummary}
@@ -23,21 +23,25 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<!-- TODO: Replace on:click with swipe event -->
+	<!-- TODO: Better transition effect -->
 	<div class="history" on:click={swapSummary}>
-		{#if showSummary}
-			<div class="scroll-icon" transition:fade={{ duration: 100 }}>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="24"
-					height="24"
-					viewBox="0 0 24 24"
-					><path
-						fill="currentColor"
-						d="M7.41 18.41L6 17l6-6l6 6l-1.41 1.41L12 13.83zm0-6L6 11l6-6l6 6l-1.41 1.41L12 7.83z"
-					/></svg
-				>
-			</div>
-		{/if}
+		<!-- {#if showSummary} -->
+		<div
+			class="scroll-icon {showSummary ? '' : 'icon-reversed'}"
+			transition:fade={{ duration: 100 }}
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				><path
+					fill="currentColor"
+					d="M7.41 18.41L6 17l6-6l6 6l-1.41 1.41L12 13.83zm0-6L6 11l6-6l6 6l-1.41 1.41L12 7.83z"
+				/></svg
+			>
+		</div>
+		<!-- {/if} -->
 		<History />
 	</div>
 </div>
@@ -56,11 +60,11 @@
 		overflow: hidden;
 	}
 
-	.expand {
+	.collapsible.expand {
 		height: 500px;
 	}
 
-	.collapse {
+	.collapsible.collapse {
 		height: 0;
 	}
 
@@ -76,11 +80,16 @@
 	.scroll-icon {
 		display: flex;
 		justify-content: center;
+		transition: transform 500ms;
 	}
 
 	.scroll-icon > svg {
 		transform: scale(1.5, 1);
 		margin-bottom: 5px;
+	}
+
+	.icon-reversed {
+		transform: rotate(180deg);
 	}
 
 	svg {
